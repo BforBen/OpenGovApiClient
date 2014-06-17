@@ -1,0 +1,30 @@
+﻿@model IEnumerable<OpenGovApiClient.Models.ServiceTask>
+
+@{
+    ViewBag.Title = "Browse " + Model.First().CategoryName.ToLower();
+}
+
+<div class="row">
+    <div class="col-xs-12">
+        <ol class="breadcrumb">
+            <li><a href="~/">Home</a></li>
+            <li class="active">@Model.First().CategoryName</li>
+        </ol>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <h1>Browse @Model.First().CategoryName.ToLower()</h1>
+
+        <ul class="list-unstyled">
+            @foreach (var item in Model)
+            {
+                <li>
+                    <h3><a href="~/@item.Slug">@Html.DisplayFor(modelItem => item.Title)</a></h3>
+                    <p>@Html.DisplayFor(modelItem => item.Summary)</p>
+                </li>
+            }
+        </ul>
+    </div>
+</div>

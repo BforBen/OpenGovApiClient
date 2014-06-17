@@ -1,0 +1,25 @@
+﻿@model IEnumerable<OpenGovApiClient.Models.ServiceTask>
+@{
+    ViewBag.Title = "Home - Surrey Hills District Council";
+}
+
+<div class="jumbotron">
+    @*<h1>Surrey Hills District Council</h1>*@
+    <p class="lead">A test website to prototype an Open311 API replacement.</p>
+    <p><a href="https://ben.cheetham.me.uk/blog/2014/06/a-shared-web-platform-for-local-government/" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+</div>
+
+<div class="row">
+    @foreach (var Category in Model.GroupBy(i => i.CategoryName))
+    {
+        <div class="col-md-4">
+            <h2><a href="~/browse/@Category.First().CategorySlug">@Category.Key</a></h2>
+            <ul class="list-inline">
+                @foreach (var Task in Category)
+                {
+                    <li><a href="~/@Task.Slug" title="@Task.Summary">@Task.Title</a></li>
+                }
+            </ul>
+        </div>
+    }
+</div>

@@ -1,0 +1,23 @@
+﻿@model OpenGovApiClient.Models.ServiceTask
+
+@{
+    ViewBag.Title = Model.Title;
+}
+
+<div class="row">
+    <div class="col-xs-12">
+        <ol class="breadcrumb">
+            <li><a href="~/">Home</a></li>
+            <li><a href="~/browse/@Html.DisplayFor(model => model.CategorySlug)">@Html.DisplayFor(model => model.CategoryName)</a></li>
+            <li class="active">@Html.DisplayFor(model => model.Title)</li>
+        </ol>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <h1>@Model.Title</h1>
+
+        <p>@Html.DisplayFor(model => model.Content)</p>
+    </div>
+</div>
