@@ -42,7 +42,7 @@ namespace OpenGovApiClient
                     CategoryId = i.Categories.First().Name,
                     CategoryName = i.Categories.First().Label,
                     Content = ((TextSyndicationContent)i.Content).Text,
-                    Details = i.Links.Where(l => l.RelationshipType == "self").SingleOrDefault().Uri,
+                    Details = i.Links.Where(l => l.RelationshipType == "self" && l.MediaType == "application/atom+xml").SingleOrDefault().Uri,
                     Id = i.Id,
                     Summary = i.Summary.Text,
                     Title = i.Title.Text,
