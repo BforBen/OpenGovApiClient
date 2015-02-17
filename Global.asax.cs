@@ -12,6 +12,8 @@ using System.Xml;
 using OpenGovApiClient.Models;
 using System.Runtime.Caching;
 
+using System.Configuration;
+
 namespace OpenGovApiClient
 {
     public class MvcApplication : System.Web.HttpApplication
@@ -24,8 +26,6 @@ namespace OpenGovApiClient
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
-
-
             var MemCache = MemoryCache.Default;
 
             var Tasks = (IEnumerable<ServiceTask>)MemCache.Get("TaskList");
@@ -33,10 +33,13 @@ namespace OpenGovApiClient
             if (Tasks == null)
             {
                 var formatter = new Atom10FeedFormatter();
-                using (XmlReader reader = XmlReader.Create("http://opengovapi.azurewebsites.net/Services"))
+                using (XmlReader reader = XmlReader.Create(ConfigurationManager.AppSettings["ServiceApiUrl"]))
                 {
                     formatter.ReadFrom(reader);
                 }
+
+                MemCache.Add("Organisation", formatter.Feed.Authors.First().Name, new CacheItemPolicy {});
+
                 var Items = formatter.Feed.Items.Select(i => new ServiceTask
                 {
                     CategoryId = i.Categories.First().Name,

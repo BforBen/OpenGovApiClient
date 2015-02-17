@@ -12,6 +12,11 @@ namespace OpenGovApiClient.Controllers
     {
         private MemoryCache MemCache = MemoryCache.Default;
 
+        public HomeController()
+        {
+            ViewData["Organisation"] = MemCache.Get("Organisation");
+        }
+
         [Route]
         public ActionResult Index()
         {

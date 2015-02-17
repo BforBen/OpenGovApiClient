@@ -18,6 +18,6 @@
     <div class="col-xs-12">
         <h1>@Model.Title</h1>
 
-        <p>@Html.DisplayFor(model => model.Content)</p>
+        @Html.Raw(Model.Content)
     </div>
 </div>
